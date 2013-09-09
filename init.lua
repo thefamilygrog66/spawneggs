@@ -47,16 +47,41 @@ minetest.register_node("spawneggs:egg", {
 		type = "fixed",
 		fixed = {-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125}
 	},
-	groups = {cracky=3},
+	groups = {dig_immediate = 3},
 	drop = "spawneggs:egg",
 	sounds = default.node_sound_stone_defaults(),
 })
 
+-- Fried Egg
+minetest.register_craftitem("spawneggs:friedegg", {
+    description = "Fried Egg",
+    inventory_image = "spawneggs_friedegg.png",
+    on_use = minetest.item_eat(4),
+})
+
+minetest.register_craft({
+    type = 'cooking',
+    output = 'spawneggs:friedegg',
+    recipe = 'spawneggs:egg',
+    cooktime = 5,
+})
+
+-- Egg Spawning and De-spawning
 minetest.register_abm(
 	{nodenames = {"default:grass_1"},
-	interval = 30,
-	chance = 100,
+	interval = 600,
+	chance = 3000,
 	action = function(pos)
 	minetest.env:add_node(pos, {name="spawneggs:egg"})
 	end,
 })
+
+minetest.register_abm(
+	{nodenames = {"spawneggs:egg"},
+	interval = 600,
+	chance = 3000,
+	action = function(pos)
+	minetest.env:add_node(pos, {name="air"})
+	end,
+})
+
