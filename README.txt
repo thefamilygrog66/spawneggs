@@ -6,6 +6,8 @@ by thefamilygrog66
 Description:
 This mod randomly spawns "spawning eggs", which when combined with various materials, will become mob spawning eggs (compatible only with PilzAdam's Simple Mobs mod). When the player places one of these, the corresponding mob will appear.
 
+If the player prefers to create a health item instead of a mob, they can simply cook the spawning egg, which will produce a FRIED EGG that can be eaten to regain hearts.
+
 Recipes:
 
 Dirt Monster
@@ -47,6 +49,9 @@ Tree Monster
 +---------------+---------------+
 | spawning egg  |    sapling    |
 +---------------+---------------+
+
+Fried Egg
+- cook spawning egg
 
 
 Mod dependencies: default, mobs, wool
