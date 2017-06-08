@@ -1,3 +1,14 @@
+local egg_interval = tonumber(minetest.settings:get('spawneggs.egg_interval')) or 600
+local egg_chance = tonumber(minetest.settings:get('spawneggs.egg_chance')) or 3000
+local grass_interval = tonumber(minetest.settings:get('spawneggs.grass_interval')) or 600
+local grass_chance = tonumber(minetest.settings:get('spawneggs.grass_chance')) or 3000
+
+-- Allow spawnegg nodes to spawn in world
+local enable_node_spawn = minetest.settings:get_bool('spawneggs.enable_node_spawn')
+if enable_node_spawn == nil then
+	enable_node_spawn = true
+end
+
 local spawneggs_list = {
 	{ "Spawn Dirt Monster", "dirt_monster", "default:dirt"},
 	{ "Spawn Dungeon Master", "dungeon_master", "default:mese"},	
@@ -66,22 +77,25 @@ minetest.register_craft({
     cooktime = 5,
 })
 
+
 -- Egg Spawning and De-spawning
-minetest.register_abm(
-	{nodenames = {"default:grass_1"},
-	interval = 600,
-	chance = 3000,
-	action = function(pos)
-	minetest.env:add_node(pos, {name="spawneggs:egg"})
-	end,
-})
+
+if enable_node_spawn then
+	minetest.register_abm(
+		{nodenames = {"default:grass_1"},
+		interval = grass_interval,
+		chance = grass_chance,
+		action = function(pos)
+		minetest.env:add_node(pos, {name="spawneggs:egg"})
+		end,
+	})
+end
 
 minetest.register_abm(
 	{nodenames = {"spawneggs:egg"},
-	interval = 600,
-	chance = 3000,
+	interval = egg_interval,
+	chance = egg_chance,
 	action = function(pos)
 	minetest.env:add_node(pos, {name="air"})
 	end,
 })
-
